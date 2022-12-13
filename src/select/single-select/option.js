@@ -22,9 +22,8 @@ function Options({
   };
   useEffect(() => {
     const val = JSON.parse(localStorage.getItem("nspira_select"));
-    const el = document.getElementsByClassName("nspira__single-select--label");
+    const el = document.getElementsByClassName("nspira__select--single-select--label");
     for (let i = 0; i < el.length; i++) {
-      // console.log('styles',el[i].style.fontSize);
       const fontVal = el[i].style.fontSize;
       const txtWidth = fontVal
         ? el[i].textContent.length * fontVal
@@ -35,7 +34,6 @@ function Options({
     }
   }, []);
   const localWidth = JSON.parse(localStorage.getItem("nspira_select"));
-  console.log("list width", listWidth, localWidth);
   return (
     <>
       {customLabel ? (
@@ -53,7 +51,7 @@ function Options({
           dStyles={defaultStyles}
           sStyles={selectStyles}
           hStyles={hoverStyles}
-          className="nspira__single-select--label"
+          className="nspira__select--single-select--label"
         >
           {item[label]}
         </SingleOption>

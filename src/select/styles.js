@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { colors } from "./helpers";
+import { colors } from "./theme/theme.colors";
+
+export const Flex = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${({ styles }) => styles}
+`;
 
 export const SelectContainer = styled.div`
   width: inherit;
@@ -7,39 +14,23 @@ export const SelectContainer = styled.div`
   background-color: transparent;
 `;
 
-export const SelectField = styled.div`
+export const SelectField = styled.label`
   width: inherit;
   height: 40px;
   border: 1px solid ${({ isError }) => (isError ? colors.error : colors.border)};
   cursor: ${({ isDisabled }) => (isDisabled ? "not-allowed" : "pointer")};
   border-radius: 4px;
-  display: flex;
+  display: grid;
+  grid-template-columns: calc(100% - 80px) 60px 20px;
+  grid-template-columns: ${({ gridWidth }) =>
+    `calc(100% - ${gridWidth + 20}px) ${gridWidth}px 20px`};
   align-items: center;
-  justify-content: space-between;
   z-index: ${({ isEnable }) => (isEnable ? 91 : 0)};
-  padding: 0 8px;
+  padding: 0 6px;
   opacity: ${({ isDisabled }) => (isDisabled ? 0.6 : 1)};
-  gap: 5px;
-`;
-export const Text = styled.input`
-  position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  height: 96%;
-  border: none;
-  outline: none;
-  z-index: 1;
-  font-size: 16px;
-  cursor: ${({ isDisabled }) => (isDisabled ? "not-allowed" : "pointer")};
-  background-color: transparent;
-  color: ${({ isError }) => (isError ? `${colors.error}` : `${colors.dark}`)};
 
-  &::placeholder {
-    font-size: 16px;
-    color: ${({ isError }) =>
-      isError ? `${colors.error}` : `RGB(117, 117, 117)`};
+  &:focus {
+    border:1px solid blue ;
   }
 `;
 
@@ -72,8 +63,7 @@ export const OptionContainer = styled.div`
   max-height: 400px;
   background-color: ${colors.lite};
   position: relative;
-  /* width: calc(100% + 16px); */
-  box-shadow: 1px 1px 1px #cecece;
+  box-shadow: 1px 1px 1px ${colors.shadow};
   border-radius: 5px;
 `;
 
@@ -98,10 +88,6 @@ export const SingleOption = styled.div`
   &:nth-child(${({ activeId }) => activeId}) {
     ${({ hStyles }) => hStyles}
   }
-`;
-
-export const List = styled.ul`
-  padding: 0;
 `;
 
 export const MultiOption = styled.label`
@@ -139,7 +125,7 @@ export const FocusOutContainer = styled.div`
   z-index: 90;
 `;
 
-export const Tooltip = styled.div`
+export const Tooltip = styled.label`
   position: fixed;
   z-index: 10;
   background-color: ${colors.dark};
@@ -155,6 +141,7 @@ export const Tooltip = styled.div`
   top: ${({ top }) => `${top}px`};
   left: ${({ left }) => `${left}px`};
   right: ${({ right }) => `${right}px`};
+  z-index: 91;
 
   input {
     opacity: 0;
@@ -186,23 +173,24 @@ export const CheckBox = styled.input`
     background-color: ${({ dStyles }) => dStyles.color};
     transform-origin: bottom left;
     clip-path: ${({ clippath }) => clippath};
-    /* clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); */
-    /* clip-path: circle(40% at 55% 55%) */
   }
   &:checked::before {
     transform: scale(1);
   }
 `;
 
+export const CheckBoxContainer = styled.div`
+  width: 15px;
+`;
+
 export const NoDataWrapper = styled(SingleOption)`
-  color: #a7a8a7;
+  color: ${colors.disable};
 `;
 
 export const SelectAllWrapper = styled(MultiOption)`
   display: flex;
   align-items: center;
   width: 100%;
-  /* overflow:hidden ; */
   padding: 0 8px;
   background-color: ${({ activeId, isChecked, dStyles, sStyles, hStyles }) =>
     `${
@@ -224,29 +212,83 @@ export const IconWrapper = styled.div`
   align-items: center;
 `;
 
-export const Count = styled.button`
-  border: none;
-  outline: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 1.1rem;
-`;
-
 export const MultiIconWrapper = styled.span`
   margin-left: 5px;
 `;
 
 export const Chip = styled.div`
-  background-color: red;
-`;
+  background-color: ${colors.chip};
+  margin: 0 4px;
+  border-radius: ${({ type }) => (type === "square" ? "3px" : "20px")};
+  position: relative;
+  display: flex;
+  align-items: center;
 
-export const Input = styled.input`
-  border: 1px solid red;
-`;
-
-export const Label = styled.label`
-  background-color: blue;
-  &:hover {
-    background-color: red;
+  .nspira__select--chip-title {
+    padding: 4px 6px;
+    min-width: 50px;
+    cursor: default;
   }
+
+  .nspira__select--chip-close {
+    display: flex;
+    border: none;
+    outline: none;
+    padding: 5px 6px;
+    height: 100%;
+    cursor: pointer;
+    text-align: center;
+    width: 30px;
+    border-bottom-right-radius: ${({ type }) =>
+      type === "square" ? "3px" : "20px"};
+    border-top-right-radius: ${({ type }) =>
+      type === "square" ? "3px" : "20px"};
+    background-color: ${colors.chipClose};
+
+    &:hover {
+      backdrop-filter: brightness(20%);
+    }
+  }
+`;
+
+export const ChipLess = styled.span`
+  margin-right: 5px;
+`;
+
+export const CountButton = styled.label`
+  padding: 4px;
+`;
+
+export const FieldContainer = styled.div`
+  height: inherit;
+  width:100%;
+  display: ${({isChips}) =>  isChips ? 'flex' : 'block'};
+  align-items: center;
+  justify-content: flex-start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis ;
+  cursor: ${({ isDisabled }) => (isDisabled ? "not-allowed" : "pointer")};
+  color: ${({ isError, isActive }) =>
+    isActive ? "#000000" : isError ? `${colors.error}` : `${colors.placeholder}`};
+`;
+
+export const TooltipFocusOutContainer = styled.div`
+  background-color: ${colors.dark};
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  opacity: 0;
+`;
+
+export const Icon = styled.img`
+  width: 1rem;
+  cursor: pointer;
+`;
+
+export const NavIcon = styled(Icon)`
+  margin-left: 5px;
 `;

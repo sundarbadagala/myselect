@@ -14,4 +14,7 @@ export const colors = {
   checkbg: "#ffffff",
   checkedbg: "#3982f7",
   checkicon: "#ffffff",
+  chip:"#cecece",
+  chipClose:"#fa6969",
+  placeholder:'RGB(117, 117, 117)'
 };

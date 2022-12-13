@@ -24,7 +24,7 @@ function SelectAll({ idx, activeId }) {
         sStyles={lSS}
         hStyles={lHS}
         isChecked={isCheckedAll}
-        className="nspira__multi-select--label"
+        className="nspira__select--multi-select-label"
         style={{
           ...labelStyles
         }}
@@ -39,7 +39,7 @@ function SelectAll({ idx, activeId }) {
           dStyles={defaultStyles}
           sStyles={selectStyles}
           clippath={clippath}
-          className="nspira__multi-select--checkbox"
+          className="nspira__select--multi-select-checkbox"
         />
         {"Select All"}
       </SelectAllWrapper>

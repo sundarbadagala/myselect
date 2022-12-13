@@ -3,7 +3,6 @@ import { getLabels } from "./getLabels";
 import { getPositions } from "./getPositions";
 import { getString } from "./getString";
 import { getStyleHeight } from "./getStyleHeight";
-import { colors } from "./getColors";
 import { getCheckBoxStyles } from "./getCheckBoxStyles";
 import { getStyleStates } from "./getStyleStates";
 import { getLabelStyles } from "./getLabelStyles";
@@ -15,7 +14,6 @@ export {
   getPositions,
   getString,
   getStyleHeight,
-  colors,
   getCheckBoxStyles,
   getStyleStates,
   getLabelStyles,

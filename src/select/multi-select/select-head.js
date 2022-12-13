@@ -1,36 +1,31 @@
-import React, { useContext, useState } from "react";
-import { SelectField, Text, IconWrapper, Count, MultiIconWrapper } from "../styles";
-import Tooltip from "../elements/tooltip";
-import UpArrow from "../assets/up_arrow.svg";
-import DownArrow from "../assets/down_arrow.svg";
+import React, { useContext } from "react";
+import { SelectField, Flex } from "../styles";
 import { SelectContext } from "../contextApi";
 import { getLabels } from "../helpers";
+import Navigator from "../elements/navtigators";
+import Counter from "../elements/count";
+import Field from "../elements/field";
+import Clear from "../elements/clear";
 
 function SelectHead() {
-  const { details, isEnable, checkedOptions, handleFocus } =
-    useContext(SelectContext);
+  const { details, handleFocus, checkedOptions } = useContext(SelectContext);
   const {
     isDisabled,
     isError,
-    placeholder = "Select",
-    label = "label",
     headProps,
     styles,
+    placeholder = "Select",
+    label = "label",
   } = { ...details };
   const { headStyles } = { ...styles };
-  const { downIcon, upIcon, startIcon } = { ...headProps };
-  const [isDisplay, setIsDisplay] = useState(false);
-  const [positions, setPositions] = useState({ x: 0, y: 0 });
-  const [inHeight, setInHeight] = useState(0);
-  const [inSizes, setInSizes] = useState({ x: 0, y: 0 });
-
-  const handleDisplay = (e, condition) => {
-    e.stopPropagation();
-    setPositions({ x: e.clientX, y: e.clientY });
-    setIsDisplay(condition);
-    setInHeight(window.innerHeight);
-    setInSizes({ y: window.innerHeight, x: window.innerWidth });
+  const { startIcon, isChips, isDisplayAll, isClearable, chipType } = {
+    ...headProps,
   };
+  const onFocus = (e) => {
+    e.stopPropagation();
+    handleFocus();
+  };
+  const handleNone = () => {};
   const { labels } = { ...getLabels(checkedOptions, label) };
   return (
     <>
@@ -39,52 +34,33 @@ function SelectHead() {
         isError={isError}
         style={headStyles}
         className="nspira__multi-select--head"
+        onClick={isDisabled ? handleNone : (e) => onFocus(e)}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowDown" || e.code === "ArrowDown") {
+            !isDisabled && handleFocus();
+          }
+        }}
+        tabIndex={0}
+        gridWidth={labels?.length > 999 ? 60 : labels?.length > 99 ? 50 : 40}
       >
-        {startIcon}
-        <Text
-          type="text"
-          onKeyDown={(e) => {
-            if (e.key === "ArrowDown" || e.code === "ArrowDown") {
-              handleFocus();
-            }
-          }}
-          onClick={handleFocus}
-          defaultValue={labels?.[0]}
-          tabIndex={0}
-          placeholder={placeholder}
-          disabled={isDisabled}
-          isDisabled={isDisabled}
-          isError={isError}
-          className="nspira__multi-select--text"
-        />
-        <IconWrapper className="nspira__multi-select--icon-wrapper">
-          <Count onClick={(e) => handleDisplay(e, true)} className='nspira__multi-select--count'>
-            {checkedOptions.length > 1 && `+${checkedOptions.length - 1}`}
-          </Count>
-          <MultiIconWrapper className="nspira__multi-select--icon">
-            {isEnable ? (
-              upIcon ? (
-                upIcon
-              ) : (
-                <img src={UpArrow} alt="up arrow" />
-              )
-            ) : downIcon ? (
-              downIcon
-            ) : (
-              <img src={DownArrow} alt="down arrow" />
-            )}
-          </MultiIconWrapper>
-        </IconWrapper>
+        <Flex styles={{ justifyContent: "flex-start" }}>
+          {startIcon}
+          <Field
+            data={labels}
+            placeholder={placeholder}
+            isChips={isChips}
+            isDisplayAll={isDisplayAll}
+            cData={checkedOptions}
+            chipType={chipType}
+          />
+        </Flex>
+
+        <Flex styles={{ justifyContent: "flex-end" }}>
+          <Counter isDisplayAll={isDisplayAll} />
+          {isClearable && <Clear type="multi" />}
+        </Flex>
+        <Navigator />
       </SelectField>
-      {isDisplay && (
-        <Tooltip
-          positions={positions}
-          list={labels}
-          handleDisplay={handleDisplay}
-          inHeight={inHeight}
-          inSizes={inSizes}
-        />
-      )}
     </>
   );
 }

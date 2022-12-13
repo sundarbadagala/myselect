@@ -26,9 +26,9 @@ function MultiSelect() {
 
   useEffect(() => {
     if (options?.length) {
-      console.log(id, "if options", value);
+      // console.log(id, "if options", value);
       if (checkedData.length) {
-        console.log(id, "if options check");
+        // console.log(id, "if options check");
         const checkedValues = checkedData.map((item) => item?.[keys]);
         const allOptions = [
           ...options?.map((item, index) =>
@@ -48,7 +48,7 @@ function MultiSelect() {
           ),
         ];
         if (value.length) {
-          console.log(id, "if options checked value");
+          // console.log(id, "if options checked value");
           const updatedData = allOptions.map((item) =>
             value.includes(item?.[keys])
               ? {
@@ -65,7 +65,7 @@ function MultiSelect() {
           const filterOpts = allOptions.filter((option) =>
             value.includes(option?.[keys])
           );
-          console.log(id, "filter opts", filterOpts);
+          // console.log(id, "filter opts", filterOpts);
           handleData(updatedData);
           handleCheckedOptions(filterOpts);
           if (updatedData.length === filterOpts.length) {
@@ -74,14 +74,14 @@ function MultiSelect() {
             handleIsCheckedAll(false);
           }
         } else {
-          console.log(id, "if options check else value");
+          // console.log(id, "if options check else value");
           handleData(allOptions);
           handleCheckedOptions(
             allOptions.filter((item) => item.isChecked === true)
           );
         }
       } else {
-        console.log(id, "if options else check");
+        // console.log(id, "if options else check");
         const allOptions = [
           ...options?.map((item, index) => ({
             ...item,
@@ -92,7 +92,7 @@ function MultiSelect() {
         ];
 
         if (value.length) {
-          console.log(id, "if options else check if value", value);
+          // console.log(id, "if options else check if value", value);
           const updatedData = allOptions.map((item) =>
             value.includes(item?.[keys])
               ? {
@@ -109,7 +109,6 @@ function MultiSelect() {
           const filterOpts = allOptions.filter((option) =>
             value.includes(option?.[keys])
           );
-          // console.log('checking....', filterOpts);
           handleData(updatedData);
           handleCheckedOptions(filterOpts);
           if (updatedData.length === filterOpts.length) {
@@ -118,13 +117,13 @@ function MultiSelect() {
             handleIsCheckedAll(false);
           }
         } else {
-          console.log(id, "if options else check else value");
+          // console.log(id, "if options else check else value");
           handleData(allOptions);
           handleCheckedOptions([]);
         }
       }
     } else {
-      console.log(id, "else options");
+      // console.log(id, "else options");
       handleData([]);
       handleCheckedOptions([]);
     }

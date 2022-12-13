@@ -92,7 +92,6 @@ function SelectProvider({ children }) {
     setSearchKey("");
   };
   const handleCheck = (isChecked, item, id) => {
-    console.log("check", item, id);
     const { onChange, keys = "value" } = { ...details };
     const newData = [...data];
     if (isChecked) {

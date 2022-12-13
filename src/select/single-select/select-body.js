@@ -44,7 +44,7 @@ function SingleSelectBody() {
   };
   useEffect(() => {
     const oLenght = document.getElementsByClassName(
-      "nspira__single-select--options"
+      "nspira__select--single-select--options"
     );
     setListBoxWidth(oLenght[0].offsetWidth);
     return () => {
@@ -69,7 +69,7 @@ function SingleSelectBody() {
 
   return (
     <>
-      <ListContainer className="nspira__single-select--body">
+      <ListContainer className="nspira__select--single-select--body">
         <SearchField
           type="text"
           onChange={handleChange}
@@ -78,13 +78,12 @@ function SingleSelectBody() {
           placeholder={searchPlaceholder}
           onKeyDown={(e) => handleKey(e)}
           style={searchStyles}
-          className="nspira__single-select--search"
+          className="nspira__select--single-select--search"
         />
         <OptionContainer
-          style={{ ...bodyStyles}}
-          className="nspira__single-select--options"
+          style={{ ...bodyStyles }}
+          className="nspira__select--single-select--options"
         >
-          {/* <div style={{width:'50%', overflow:'auto'}}> */}
           {data?.length ? (
             <FixedSizeList
               height={data.length < 10 ? data.length * 40 : 400}
@@ -96,7 +95,6 @@ function SingleSelectBody() {
           ) : (
             <NoData>{dependencyLabel}</NoData>
           )}
-          {/* </div> */}
         </OptionContainer>
       </ListContainer>
     </>

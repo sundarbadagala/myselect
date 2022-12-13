@@ -1,27 +1,13 @@
-import { colors } from "./getColors";
 import { getStyleStates } from "./getStyleStates";
-
-const defObj = {
-  color: colors.dark,
-  backgroundColor: colors.lite,
-  height:'40px'
-};
-const slctObj = {
-  color: colors.dark,
-  backgroundColor: colors.active,
-};
-const hvrObj = {
-  color: colors.dark,
-  backgroundColor: colors.hover,
-};
+import { defStyles, slctStyles, hvrStyles } from "../theme/label.styles";
 
 export const getLabelStyles = (styles) => {
   const { labelStyles } = { ...styles };
   const { defaultStyles, selectStyles, hoverStyles } = getStyleStates(
     labelStyles,
-    defObj,
-    slctObj,
-    hvrObj
+    defStyles,
+    slctStyles,
+    hvrStyles
   );
   return { defaultStyles, selectStyles, hoverStyles };
 };

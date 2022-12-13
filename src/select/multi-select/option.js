@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { MultiOption, CheckBox } from "../styles";
+import { MultiOption, CheckBox, CheckBoxContainer } from "../styles";
 import { SelectContext } from "../contextApi";
 import { getCheckBoxStyles, getLabelStyles, getClipPath } from "../helpers";
 
@@ -25,7 +25,7 @@ function Options({
   const clippath = getClipPath(checkBoxProps);
   useEffect(() => {
     const val = JSON.parse(localStorage.getItem("nspira_select"));
-    const el = document.getElementsByClassName("nspira__multi-select--label");
+    const el = document.getElementsByClassName("nspira__select--multi-select--label");
     for (let i = 0; i < el.length; i++) {
       const txtWidth = el[i].textContent.length * 11;
       if (val < txtWidth) {
@@ -47,9 +47,9 @@ function Options({
         dStyles={lDS}
         sStyles={lSS}
         hStyles={lHS}
-        className="nspira__multi-select--label"
+        className="nspira__select--multi-select--label"
       >
-        <div style={{ width: "15px" }}>
+        <CheckBoxContainer>
           <CheckBox
             type="checkbox"
             checked={isChecked}
@@ -60,9 +60,9 @@ function Options({
             dStyles={defaultStyles}
             sStyles={selectStyles}
             clippath={clippath}
-            className="nspira__multi-select--checkbox"
+            className="nspira__select--multi-select--checkbox"
           />
-        </div>
+        </CheckBoxContainer>
         {item[label]}
       </MultiOption>
     );

@@ -48,8 +48,8 @@ function SingleSelect() {
 
   return (
     <>
-      {isEnable && <FocusOutContainer onClick={handleFocus} className='nspira__focus-out'/>}
-      <SelectContainer isDisabled={isDisabled} className='nspira__single-select'>
+      {isEnable && <FocusOutContainer onClick={handleFocus} className='nspira__select--single-select--focus-out'/>}
+      <SelectContainer isDisabled={isDisabled} className='nspira__select--single-select--container'>
         <SelectHead />
         {isEnable && <SelectBody />}
       </SelectContainer>

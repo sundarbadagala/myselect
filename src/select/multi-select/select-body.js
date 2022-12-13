@@ -56,7 +56,7 @@ function MultiSelectBody() {
   };
   useEffect(() => {
     const oLenght = document.getElementsByClassName(
-      "nspira__multi-select--options"
+      "nspira__select--multi-select--options"
     );
     setListBoxWidth(oLenght[0].offsetWidth);
     return () => {
@@ -82,7 +82,7 @@ function MultiSelectBody() {
   };
   return (
     <>
-      <ListContainer className="nspira__multi-select--body">
+      <ListContainer className="nspira__select--multi-select--body">
         <SearchField
           onChange={handleChange}
           value={searchKey}
@@ -90,11 +90,11 @@ function MultiSelectBody() {
           placeholder={searchPlaceholder ? searchPlaceholder : "Search..."}
           onKeyDown={handleKey}
           style={searchStyles}
-          className="nspira__multi-select--search"
+          className="nspira__select--multi-select--search"
         />
         <OptionContainer
           style={bodyStyles}
-          className="nspira__multi-select--options"
+          className="nspira__select--multi-select--options"
         >
           {filterData.length ? (
             <>

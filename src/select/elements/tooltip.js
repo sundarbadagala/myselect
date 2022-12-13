@@ -1,26 +1,37 @@
 import React from "react";
-import { Tooltip } from "../styles";
+import { Tooltip, TooltipFocusOutContainer } from "../styles";
 import { getPositions } from "../helpers/getPositions";
 
-function CheckedList({ positions, list, handleDisplay, inHeight, inSizes }) {
+function TooltipBox({
+  positions,
+  list,
+  handleDisplay,
+  inHeight,
+  inSizes,
+  children,
+}) {
   const { leftHeight, rightHeight, topHeight } = getPositions(
     positions,
-    inHeight,
     inSizes,
     list
   );
+  const handleNone = (e) => {
+    e.stopPropagation();
+  };
   return (
-    <Tooltip
-      top={topHeight}
-      left={leftHeight}
-      right={rightHeight}
-      onBlur={(e) => handleDisplay(e, false)}
-      tabIndex={0}
-      className='nspira__sleect'
-    >
-      <input autoFocus />
-      {list.length && list.map((item, index) => <div key={index} className='nspira__select--element'>{item}</div>)}
-    </Tooltip>
+    <>
+      <TooltipFocusOutContainer onClick={(e) => handleDisplay(e, false)} className='nspira__select--tooltip-focusout-container'/>
+      <Tooltip
+        top={topHeight}
+        left={leftHeight}
+        right={rightHeight}
+        tabIndex={0}
+        className="nspira__sleect--tooltip"
+        onClick={(e) => handleNone(e)}
+      >
+        {children}
+      </Tooltip>
+    </>
   );
 }
-export default CheckedList;
+export default TooltipBox;
