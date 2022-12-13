@@ -187,6 +187,11 @@ function App() {
           startIcon: <i className="fa-sharp fa-solid fa-check"></i>,
           downIcon: <i className="fa-sharp fa-solid fa-circle-down"></i>,
           upIcon: <i className="fa-sharp fa-solid fa-circle-up"></i>,
+          isChips:true,                 //default value is false
+          chipType: 'square',           //default value is 'pill'
+          chipCloseIcon:<i className="fa-solid fa-user" style={{color:"white"}}></i>
+          isDisplayAll:true,            //default value is false
+          isClearable:true,             //default value is false
         }}
       />
     </>
@@ -306,6 +311,17 @@ function App() {
             borderRadius: "10px",
             boxShadow: "3px 3px 3px #cecece",
           },
+          chipStyles: {
+              container: {
+                border:'1px solid red'
+              },
+              title: {
+                backgroundColor:'#cecece'
+              },
+              close: {
+                backgroundColor:"orange"
+              },
+            },
           labelStyles: {
             backgroundColor: ["#faddca", "#fa9657", "#faa875"], //[defaultState, selectedState, hoverState]
             color: ["#000000", "#000000"],                      //[defaultState, selectedState & hoverState]

@@ -1,99 +1,107 @@
 import React, { useState } from "react";
 import Select from "./select";
 import { simpledata } from "./data";
-import Icon from './select/assets/close.svg'
-
-
-
 
 function App() {
   const [option, setOption] = useState("");
-  const [multiOption, setMultiOption] = useState([])
+  const [multiOption, setMultiOption] = useState([]);
   return (
-    <div style={{display:"flex", gap:'5px', flexWrap:'wrap'}}> 
-      <div style={{width:'300px'}}>
-      <Select
-        options={simpledata}
-        value={option}
-        label="first_name"
-        keys="last_name"
-        onChange={(val) => setOption(val)}
-        headProps = {{
-          // startIcon: <img src={Icon} alt=''/>,
-          // isChips: true,
-          // isDisplayAll:true,
-          // isClearable:true,
-          chipType:'pill'
-
-        }}
-      />
+    <div style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
+      <div style={{ width: "300px" }}>
+        <Select
+          options={simpledata}
+          value={option}
+          label="first_name"
+          keys="last_name"
+          onChange={(val) => setOption(val)}
+          headProps={{
+            // startIcon: <img src={Icon} alt=''/>,
+            // isChips: true,
+            // isDisplayAll:true,
+            // isClearable:true,
+            chipType: "pill",
+          }}
+        />
       </div>
-      <div style={{width:'300px'}}>
-      <Select
-        options={simpledata}
-        value={option}
-        label="first_name"
-        keys="last_name"
-        onChange={(val) => setOption(val)}
-        headProps = {{
-          // startIcon: <img src={Icon} alt=''/>,
-          isChips: true,
-          isDisplayAll:true,
-          isClearable:true,
-          chipType:'sqaure'
-
-        }}
-      />
+      <div style={{ width: "300px" }}>
+        <Select
+          options={simpledata}
+          value={option}
+          label="first_name"
+          keys="last_name"
+          onChange={(val) => setOption(val)}
+          headProps={{
+            // startIcon: <img src={Icon} alt=''/>,
+            isChips: true,
+            isDisplayAll: true,
+            isClearable: true,
+            chipType: "sqaure",
+          }}
+        />
       </div>
-      <div style={{width:'300px'}}>
-      <Select
-        isMulti
-        options={simpledata}
-        value={multiOption}
-        label="first_name"
-        keys="last_name"
-        onChange={(val) => setMultiOption(val)}
-        headProps = {{
-          isChips: true,
-          startIcon: <i className="fa-solid fa-users"></i>,
-          isDisplayAll:true,
-          isClearable:true,
-          chipType:'square',
-
-        }}
-      />
+      <div style={{ width: "300px" }}>
+        <Select
+          isMulti
+          options={simpledata}
+          value={multiOption}
+          label="first_name"
+          keys="last_name"
+          onChange={(val) => setMultiOption(val)}
+          headProps={{
+            isChips: true,
+            startIcon: <i className="fa-solid fa-users"></i>,
+            isDisplayAll: true,
+            isClearable: true,
+            chipType: "square",
+          }}
+        />
       </div>
-      <div style={{width:'300px'}}>
-      <Select
-        isMulti
-        options={simpledata}
-        value={multiOption}
-        label="first_name"
-        keys="last_name"
-        onChange={(val) => setMultiOption(val)}
-        headProps = {{
-          startIcon: <i className="fa-solid fa-user" style={{marginRight:"5px"}}></i>,
-          isDisplayAll:true,
-          isClearable:true,
-          chipType:'square',
-        }}
-      />
+      <div style={{ width: "300px" }}>
+        <Select
+          isMulti
+          options={simpledata}
+          value={multiOption}
+          label="first_name"
+          keys="last_name"
+          onChange={(val) => setMultiOption(val)}
+          headProps={{
+            startIcon: (<i className="fa-solid fa-user" style={{ marginRight: "5px" }}></i>),
+            isDisplayAll: true,
+            isClearable: true,
+            chipType: "square",
+          }}
+        />
       </div>
-      <div style={{width:'500px'}}>
-      <Select
-        isMulti
-        options={simpledata}
-        value={multiOption}
-        label="first_name"
-        keys="last_name"
-        onChange={(val) => setMultiOption(val)}
-        headProps = {{
-          isChips:true,
-          isDisplayAll:true,
-          isClearable:true,
-          chipType:'square',
-        }}
-      />
+      <div style={{ width: "500px" }}>
+        <Select
+          isMulti
+          options={simpledata}
+          value={multiOption}
+          label="first_name"
+          keys="last_name"
+          onChange={(val) => setMultiOption(val)}
+          headProps={{
+            isChips: true,
+            isDisplayAll: true,
+            isClearable: true,
+            // chipType:'square',
+            chipCloseIcon:<i className="fa-solid fa-user" style={{color:"white"}}></i>
+          }}
+          styles={{
+            chipStyles: {
+              container: {
+                // padding: "4px",
+              },
+              title: {
+                // padding: "3px",
+              },
+              close: {
+                // padding: "12px",
+                backgroundColor:"blue"
+              },
+            },
+          }}
+        />
       </div>
     </div>
   );
